@@ -10,8 +10,19 @@ function initialize(app, db) {
             res.json({
                 cops: results
             });
-        });  
+        });
     });
+
+    // GET request to '/cops/info?userId=02'
+    app.get('/cops/info', function(req, res){
+        var userId = req.query.userId //extract userId from query params
+        dbOperations.fetchCopDetails(db, userId, function(results){
+            res.json({
+                copDetails: results //return results to client
+            });
+        });
+    });
+
 }
 
 exports.initialize = initialize;
